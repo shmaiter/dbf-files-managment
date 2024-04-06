@@ -1,17 +1,14 @@
-import datetime as dt
-from icecream import ic
 import dbf
 
-db = dbf.Table("database/people.dbf")
+table = dbf.Table("test_files/test.dbf")
 
-with db:
-    for record in db:
+with table:
+    for record in table:
 
         if record["NAME"].strip() == "Bob":
             # record["birthdate"] = dt.date(1995, 8, 21)
             dbf.write(record, name="Mary")
-        # print(record[0:1])
-        print([record.name, record.birthdate])
+        print(record[0:])
 
 
 # untested

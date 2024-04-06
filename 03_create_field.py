@@ -1,12 +1,15 @@
 import dbf
 
 # FIRST: make the connection with the table
-db = dbf.Table("database/people.dbf")
-
-saldos = [125333, 562000, 451256]
+table = dbf.Table("test_files/test.dbf")
+field_names = table.field_names
+saldos = [125333, 562000, 451256, 450225]
 
 # SECOND: add the field or column
-with db:
-    db.add_fields(field_specs="saldos_pat N(6, 0)")
-    for index, record in enumerate(db):
-        dbf.write(saldos_pat=saldos[index])
+with table:
+    if "licores" not in field_names:
+        table.add_fields(field_specs="licores N(7, 0)")
+
+    for index, record in enumerate(table):
+        dbf.write(record, licores=saldos[index])
+        print(record[0:])
